@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>An Introduction to Angular 2 and Typescript</title>
+
+<!-- Don't alter this, CSSS needs it to work -->
+<link href="slideshow.css" rel="stylesheet" />
+
+<!-- Theme-specific styles go here (themes can be reused in multiple talks) -->
+<link href="ng-theme.css" rel="stylesheet" />
+
+<link href="ng-talk.css" rel="stylesheet" />
+
+<script src="prefixfree.min.js"></script>
+
+</head>
+<body data-duration="25">
+
+<header id="intro" class="slide">
+	<h1>An Introduction to<br/>Angular 2 & Typescript</h1>
+	<img class="intro-logos" src="img/angular_icon.svg" />
+	<br/>
+	<img class="intro-logos" src="img/typescript_logo.svg" />
+	<p class="attribution">Carter Schoenfeld <br/>Web Application & Integration Specialist, Kenyon College</p>
+</header>
+
+<section class="slide">
+	<h1>What is Angular 2</h1>
+	<p class="delayed">It's been in development for a loooong time (2014-2016).</p>
+	<p class="delayed">Use it to build Web, mobile, and desktop applications</p>
+	<p class="delayed">Server-side rendering or run application as a web worker</p>
+		
+	
+</section>
+
+<section class="slide">
+	<h1>What is different in Angular 2</h1>
+	<p class="delayed">The concepts remain same.</p>
+	<p class="delayed">Directives, Services, Filters (Pipes)</p>
+	<p class="delayed">Things that are gone:</p>
+	<ul class="delayed">
+		<li><code>.controller</code></li>
+		<li><code>$scope, $apply, $digest, $watch</code></li>
+		<li><code>ng-show, ng-hide, ng-click, and more</code></li>
+	</ul>
+	<p class="delayed">Built with Typescript (Google's preferred method)</p>
+</section>
+
+<section class="slide">
+	<h1>What is Typescript</h1>
+	<p class="delayed">Javascript transpiler created by Microsoft</p>
+	<p class="delayed">Transpile to ES5, ES6(ES2015), and others in future</p>
+	<p class="delayed">Allows for more OOP with classes, implements, interfaces, and annotations</p>
+	<p class="delayed">Allows for optional variable typing</p>
+	<p class="delayed">Better tooling for IDE’s to catch problems earlier</p>
+	<p class="delayed"></p>
+</section>
+
+<section class="slide">
+	<h1>Typescript Example</h1>
+	<pre>
+	<code>
+interface Person {
+	firstName : string,
+	lastName : string
+}
+class SayHello{
+	greeting: string;
+	constructor(person : Person) {
+		this.greeting  = "Hello ";
+		this.greeting += person.firstName + " ";
+		this.greeting += person.lastName;
+	}
+	greet() {
+		return this.greeting;
+	}
+}
+let p = {
+	firstName : "Donyell",
+	lastName  : "Marshall"
+};
+let hello = new SayHello(p);
+document.write(hello.greet());
+	</code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h1>NgModule</h1>
+	<p class="delayed">Single location to declare all components, directives for an application</p>
+	<p class="delayed">Import external modules</p>
+	<p class="delayed">Declare services, components throughout the entire application</p>
+	<p class="delayed">Specify a Root Component to bootstrap an application</p>
+</section>
+
+<section class="slide">
+	<h1>NgModule Example</h1>
+	<div class="code-split">
+		<h4>app.module.ts</h4>
+	<pre>
+		<code>
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+
+import { AppComponent } from './app.comp';
+import { TodoInputComponent } from './todo-input.comp';
+import { TodoListComponent } from './todo-list.comp';
+import { TodoDataService } from './todo-data.serv';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    TodoInputComponent,
+    TodoListComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule
+  ],
+  providers: [TodoDataService],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }			
+		</code>
+	</pre>
+	</div>
+	
+	<div class="code-split">
+		<h4>main.ts</h4>
+		<pre>
+			<code>
+import { platformBrowserDynamic } 
+   from '@angular/platform-browser-dynamic';
+import { AppModule } from './app/app.comp';
+
+platformBrowserDynamic().bootstrapModule(AppModule);
+			</code>
+		</pre>
+	</div>
+
+</section>
+
+<section class="slide">
+	<h1>Component</h1>
+	<p class="delayed">Pairing of logic (directive) and a template</p>
+</section>
+
+<section class="slide">
+	<h1>Component Example</h1>
+	<pre>
+		<code>
+import { Component, OnInit } from '@angular/core';
+import { TodoDataService } from '../todo-data.service';
+@Component({
+  selector: 'todo-list',
+  templateUrl: './todo-list.component.html',
+  styleUrls: ['./todo-list.component.css']
+})
+export class TodoListComponent implements OnInit {
+  todos : &lt;Array&gt;;
+  some-img : string = "my-image";
+  constructor(private todoService : TodoDataService) {
+    this.todos = this.todoService.getTodos();
+   }
+   todoStatus(todo){
+     let statusClass ="";
+     if(todo.done){
+       statusClass = "complete";
+     } else {
+       statusClass = "incomplete";
+     }
+     return statusClass;
+   }
+   doneTodo(todo){
+     todo.done = !todo.done;
+   }
+   deleteTodo(todo){
+     if(confirm("Are you sure?")){
+       this.todoService.deleteTodo(todo.id);
+     }   
+   }
+  ngOnInit() {
+  }
+}			
+		</code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h1>Template Syntax</h1>
+	<p class="delayed">Fewer rules and terms to learn</p>
+	<p class="delayed">Template Syntax closely tied to DOM API<br/>(Properties, Events, Methods)</p>
+	<p class="delayed"><code>[ ]</code> to bind to Property</p>
+	<p class="delayed"><code>( )</code> to bind to Event</p>
+	<p class="delayed"><code>{{ }}</code> to bind to data interpolation</p>
+	<p class="delayed"><code>*ngIf, *ngFor</code> to manipulate HTML</p>
+</section>
+
+<section class="slide">
+	<h1>Syntax Examples</h1>
+	<pre>
+		<code>
+&lt;img [src]="{{some-img}}.png"/&gt;
+&lt;div class="todo-input-group"&gt;
+      &lt;label for="todo-task" &gt;Add Item&lt;/label&gt;
+      &lt;input class="todo-input" 
+               placeholder="Add Item" 
+               type="text" name="todo-task" 
+               [(ngModel)]="todo.task" /&gt;
+&lt;/div&gt;
+&lt;button class="btn" 
+	[disabled]="hasInput()" 
+	(click)="addTodo()"&gt;Add&lt;/button&gt;
+&lt;div *ngIf="hasTodos()"&gt;
+    ...
+&lt;/div&gt;
+		</code>
+	</pre>
+</section>
+
+<section class="slide">
+	<h1>Angular CLI</h1>
+	<p class="delayed">Based on Ember CLI</p>
+	<p class="delayed">Create a project with <code>ng new project_name</code></p>
+	<p class="delayed">Adds all the supporting packages and folder structure</p>
+	<p class="delayed">Create a component with <code> ng g component name</code></p>
+	<p class="delayed">View your project with <code>ng serve</code></p>
+	<p class="delayed">Build your project with <code>ng build</code></p>
+	<p class="delayed">Uses Webpack for packaging</p>
+</section>
+
+
+<footer class="slide">
+	<h1>Thanks!</h1>
+</footer>
+
+<script src="slideshow.js"></script>
+
+<!-- Uncomment the plugins you need
+<script src="plugins/css-edit.js"></script>
+<script src="plugins/css-snippets.js"></script>
+<script src="plugins/css-controls.js"></script>
+<script src="plugins/code-highlight.js"></script>
+-->
+<script>var slideshow = new SlideShow();</script>
+	
+</body>
+</html>
