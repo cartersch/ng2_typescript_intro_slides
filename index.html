@@ -61,38 +61,65 @@
 
 <section class="slide">
 	<h1>Typescript Example</h1>
+	<div class="code-split">
+	<h4>Typescript</h4>	
 	<pre>
 	<code>
 interface Person {
-	firstName : string,
-	lastName : string
+  firstName : string,
+  lastName : string
 }
 class SayHello{
-	greeting: string;
-	constructor(person : Person) {
-		this.greeting  = "Hello ";
-		this.greeting += person.firstName + " ";
-		this.greeting += person.lastName;
-	}
-	greet() {
-		return this.greeting;
-	}
+  greeting: string;
+  constructor(person : Person) {
+    this.greeting  = "Hello ";
+    this.greeting += person.firstName + " ";
+    this.greeting += person.lastName;
+  }
+  greet() {
+    return this.greeting;
+  }
 }
 let p = {
-	firstName : "Donyell",
-	lastName  : "Marshall"
+  firstName : "Donyell",
+  lastName  : "Marshall"
 };
 let hello = new SayHello(p);
 document.write(hello.greet());
 	</code>
 	</pre>
+	</div>
+	<div class="code-split delayed">
+	<h4>Transpiled Javascript</h4>
+	<pre>
+	<code>
+var SayHello = (function () {
+  function SayHello(person) {
+    this.greeting = "Hello ";
+    this.greeting += person.firstName + " ";
+    this.greeting += person.lastName;
+  }
+  SayHello.prototype.greet = function () {
+    return this.greeting;
+  };
+  return SayHello;
+}());
+var p = {
+    firstName: "Donyell",
+    lastName: "Marshall"
+};
+var hello = new SayHello(p);
+document.write(hello.greet());	
+	</code>
+	</pre>	
+	</div>
 </section>
 
 <section class="slide">
 	<h1>NgModule</h1>
-	<p class="delayed">Single location to declare all components, directives for an application</p>
+	<p class="delayed">Single location to declare all components, directives, services for an application</p>
 	<p class="delayed">Import external modules</p>
-	<p class="delayed">Declare services, components throughout the entire application</p>
+	<p class="delayed">Declare which components, service, etc are publically available</p>
 	<p class="delayed">Specify a Root Component to bootstrap an application</p>
 </section>
 
