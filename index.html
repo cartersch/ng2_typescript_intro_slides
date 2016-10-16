@@ -175,13 +175,38 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 
 <section class="slide">
 	<h1>Component</h1>
-	<p class="delayed">Pairing of logic (directive) and a template</p>
+	<p class="delayed">Represents a visual element of an application</p>
+	<p class="delayed">Pairing of logic and a template</p>
+	<p class="delayed">Use annotations (decorators) to define metadata</p>
 </section>
 
 <section class="slide">
 	<h1>Component Example</h1>
+	<div class="code-split">
+		<h4>app.module.ts</h4>
 	<pre>
 		<code>
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: `
+    &lt;h&gt;>NG2 Todo&lt;/h1&gt;
+    &lt;todo-list&gt;&lt;/todo-list&gt;
+  `
+  
+})
+export class AppComponent {
+
+}				
+		</code>
+	</pre>
+	</div>
+	
+	<div class="code-split">
+		<h4>todo-list.comp.ts</h4>
+		<pre>
+			<code>
 import { Component, OnInit } from '@angular/core';
 import { TodoDataService } from '../todo-data.service';
 @Component({
@@ -190,33 +215,25 @@ import { TodoDataService } from '../todo-data.service';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
-  todos : &lt;Array&gt;;
+  todos : any;
   some-img : string = "my-image";
   constructor(private todoService : TodoDataService) {
     this.todos = this.todoService.getTodos();
-   }
-   todoStatus(todo){
-     let statusClass ="";
-     if(todo.done){
-       statusClass = "complete";
-     } else {
-       statusClass = "incomplete";
-     }
-     return statusClass;
-   }
-   doneTodo(todo){
-     todo.done = !todo.done;
-   }
-   deleteTodo(todo){
-     if(confirm("Are you sure?")){
-       this.todoService.deleteTodo(todo.id);
-     }   
-   }
+  }
+  todoStatus(todo){
+    return todo.done ? "complete" : "incomplete";
+  }
+  doneTodo(todo){
+    todo.done = !todo.done;
+  }
+  ...
   ngOnInit() {
   }
-}			
-		</code>
-	</pre>
+}
+			</code>
+		</pre>
+	</div>
+
 </section>
 
 <section class="slide">
