@@ -1,0 +1,14 @@
+<img [src]="{{some-img}}.png"/>
+<div class="todo-input-group">
+      <label for="todo-task" >Add Item</label>
+      <input class="todo-input" 
+               placeholder="Add Item" 
+               type="text" name="todo-task" 
+               [(ngModel)]="todo.task" />
+</div>
+<button class="btn" 
+	[disabled]="hasInput()" 
+	(click)="addTodo()">Add</button>
+<div *ngIf="hasTodos()">
+    ...
+</div>
