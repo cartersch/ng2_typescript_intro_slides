@@ -227,12 +227,12 @@ section > header.slide > h1 {
 }
 
 .string {
-	color: yellow;
+	color: chartreuse;
 }
 
 .keyword {
 	font-weight: bold;
-	color: deeppink;
+	color: cyan;
 }
 
 .number, .boolean {
@@ -243,6 +243,17 @@ section > header.slide > h1 {
 	color: orange;
 }
 
+
+.ng-twb-name,
+.ng-prop-name,
+.ng-evnt-name{
+    font-weight: bold;
+    color: cyan;
+}
+
+.attr-name{
+	color: chartreuse;
+}
 
 /*Overrides for time class*/
 #timer{
@@ -266,4 +277,9 @@ section > header.slide > h1 {
 	font-size: 0.25em;
 	height: 520px;
 	color: #000000;
+}
+
+.ts-logo{
+    background-color: #152740;
+    padding: 10px 25px;
 }

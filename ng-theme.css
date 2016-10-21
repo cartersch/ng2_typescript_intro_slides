@@ -66,7 +66,7 @@ pre, style, textarea {
 	margin-left: -.1em;
 	border:2px solid rgba(255, 255, 255, .1);
 	box-shadow:.1em .1em .5em black inset;
-    background: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.8);
 }
 
 	pre > code {
@@ -239,12 +239,12 @@ section > header.slide {
 }
 
 .string {
-	color: yellow;
+	color: darkblue;
 }
 
 .keyword {
 	font-weight: bold;
-	color: deeppink;
+	color: red;
 }
 
 .number, .boolean {
@@ -253,6 +253,17 @@ section > header.slide {
 
 .regex {
 	color: orange;
+}
+
+.ng-twb-name,
+.ng-prop-name,
+.ng-evnt-name{
+	font-weight: bold;
+    color: red;
+}
+
+.attr-name{
+	color: blue;
 }
 
 
