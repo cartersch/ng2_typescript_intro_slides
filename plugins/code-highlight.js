@@ -8,6 +8,17 @@
 
 var _ = window.Highlight = {
 	languages: {
+		typescript: {
+			'comment': /(\/\*.*?\*\/)|\/\/.*?(\r?\n|$)/g,
+			'regex': /\/(\\?.)+?\/[gim]{0,3}/g,
+			'string': /(('|").*?(\2))/g, // used to be: /'.*?'|".*?"/g,
+			'keyword': /\b(class|let|if|else|constructor|export|for|return|import|declarations|imports|bootstrap|providers|interface|from|implements|selector|template|templateUrl|styleUrls|this|null)\b/g,
+			'boolean': /\b(true|false)\b/g,
+			'number': /\b-?(0x)?\d*\.?\d+\b/g,
+			'operator': /([-+!=<>]|&lt;){1,3}/g,
+			'ignore': /&(lt|gt|amp);/gi,
+			'punctuation': /[{}[\];(),.]/g
+		},
 		javascript: {
 			'comment': /(\/\*.*?\*\/)|\/\/.*?(\r?\n|$)/g,
 			'regex': /\/(\\?.)+?\/[gim]{0,3}/g,
@@ -35,9 +46,12 @@ var _ = window.Highlight = {
 				'pattern': /(&lt;|<)\/?[\w\W]+?(>|&gt;)/gi,
 				'inside': {
 					'attr-value': {
-						'pattern': /[\w:-]+=(('|").*?(\2)|[^\s>]+(?=>|&|\s))/gi,
+						'pattern': /\[?\(?\w+\)?\]?=(('|").*?(\2)|[^\s>]+(?=>|&|\s))/gi,
 						'inside': {
 							'attr-name': /^[\w:-]+(?==)/gi,
+							'ng-prop-name' : /^\[\w+\]+(?==)/gi,
+							'ng-evnt-name' : /^\(\w+\)+(?==)/gi,
+							'ng-twb-name'  : /^\[\(\w+\)\]+(?==)/gi,
 							'punctuation': /=/g
 						}
 					},
@@ -137,13 +151,12 @@ var _ = window.Highlight = {
 		return '<span class="token ' + token + (token === 'comment'? '" spellcheck="true' : '') + '">' + content + '</span>' 
 	},
 	
-	container: function(container) {
+	container: function(container) {	
 		if(!container) {
 			return;
 		}
 		
 		var codes = container.querySelectorAll('code[lang]');
-	
 		for(var i=0; i<codes.length; i++) {
 			Highlight.init(codes[i]);
 		}

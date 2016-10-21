@@ -65,7 +65,7 @@
 	<div class="code-split">
 	<h4>Typescript</h4>	
 	<pre>
-	<code>
+	<code lang="typescript">
 interface Person {
   firstName : string,
   lastName : string
@@ -93,7 +93,7 @@ document.write(hello.greet());
 	<div class="code-split delayed">
 	<h4>Transpiled Javascript</h4>
 	<pre>
-	<code>
+	<code lang="javascript">
 var SayHello = (function () {
   function SayHello(person) {
     this.greeting = "Hello ";
@@ -129,7 +129,7 @@ document.write(hello.greet());
 	<div class="code-split">
 		<h4>app.module.ts</h4>
 	<pre>
-		<code>
+		<code lang="typescript">
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -162,10 +162,10 @@ export class AppModule { }
 	<div class="code-split">
 		<h4>main.ts</h4>
 		<pre>
-			<code>
+			<code lang="typescript">
 import { platformBrowserDynamic } 
    from '@angular/platform-browser-dynamic';
-import { AppModule } from './app/app.module';
+import { AppModule } from './app.module';
 
 platformBrowserDynamic().bootstrapModule(AppModule);
 			</code>
@@ -186,7 +186,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 	<div class="code-split">
 		<h4>app.comp.ts</h4>
 	<pre>
-		<code>
+		<code lang="typescript">
 import { Component } from '@angular/core';
 
 @Component({
@@ -207,7 +207,7 @@ export class AppComponent {
 	<div class="code-split">
 		<h4>todo-list.comp.ts</h4>
 		<pre>
-			<code>
+			<code lang="typescript">
 import { Component, OnInit } from '@angular/core';
 import { TodoDataService } from '../todo-data.service';
 @Component({
