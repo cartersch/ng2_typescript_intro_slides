@@ -262,7 +262,7 @@ export class TodoListComponent implements OnInit {
 &lt;button class="btn" 
 	[disabled]="hasInput()" 
 	(click)="addTodo()"&gt;Add&lt;/button&gt;
-&lt;div *ngIf="hasTodos()"&gt;
+&lt;div *ngFor="let todo of todos"&gt;
     ...
 &lt;/div&gt;
 		</code>
@@ -283,7 +283,7 @@ export class TodoListComponent implements OnInit {
 
 <footer class="slide">
 	<h1>Thanks!</h1>
-	<p>Slides:<br>https://github.com/cartersch/ng2_typescript_intro_slides</p>
+	<p>Slides:<br>http://cartersch.com/ccc2016/</p>
 	<br/>
 	<p>Sample App:<br/>https://github.com/cartersch/ng2_todo</p>
 	<br/>
